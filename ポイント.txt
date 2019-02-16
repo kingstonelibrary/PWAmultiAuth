@@ -1,0 +1,28 @@
+
+PWAとして認識されるための条件
+１．HTTPS対応
+２．manifest.json設置
+３．Service Workerを有効にする
+
+（注）192x192のpngアイコンが登録されていないと、ホーム画面に追加バナーが表示されないので注意
+
+マニフェスト内の２つのプロパティー
+  "start_url": "./?utm_source=homescreen",  PWAとしてアクセスしたことが分かるようにするため
+  "display": "standalone"                   ブラウザの UI を非表示にすることができため
+
+サービスワーカーを有効にする    service-worker.js
+
+  self.addEventListener('install', function(e) {
+    console.log('[ServiceWorker] Install');
+  });
+
+  self.addEventListener('activate', function(e) {
+    console.log('[ServiceWorker] Activate');
+  });
+
+  self.addEventListener('fetch', function(event) {});   // 現状では、この処理を書かないとService Workerが有効と判定されないようです
+
+  ＋　index.html から manifest.json service-worker.js を呼び出す
+      <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js').then( ...
