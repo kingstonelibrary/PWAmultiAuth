@@ -20,9 +20,17 @@ PWAとして認識されるための条件
     console.log('[ServiceWorker] Activate');
   });
 
-  self.addEventListener('fetch', function(event) {});   // 現状では、この処理を書かないとService Workerが有効と判定されないようです
+  self.addEventListener('fetch', function(event) {});   // 　← 現状では、この処理を書かないとService Workerが有効と判定されないようです
 
   ＋　index.html から manifest.json service-worker.js を呼び出す
       <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js').then( ...
+
+
+        
+PWA注意点
+        
+    ユーザがPWAをインストして以降にページを更新した場合、
+    ユーザが端末でPWAを起動しただけでは反映されず、引っ張っての操作による更新でないとダメ。
+    またPWAインスト後、最初の起動時にはネット接続が必要とのダイアログが出る
