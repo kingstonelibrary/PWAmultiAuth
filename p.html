@@ -53,7 +53,7 @@
 
     // 存在確認済のメールアドレスかどうか(true or false)
     var verified = firebase.auth().currentUser.emailVerified;
-    console.log(verified);
+    console.log('verified:' +verified);
 
     // 未確認のメールアドレスの場合、メールを送信する
     if (!verified) {
