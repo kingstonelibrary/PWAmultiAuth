@@ -17,37 +17,24 @@
       authDomain: "gcmproject-141802.firebaseapp.com",
     };
     firebase.initializeApp(config);
-    
-    // 存在確認済のメールアドレスかどうか(true or false)
-    var verified = firebase.auth().currentUser.emailVerified;
-    console.log('verified:' +verified);
 
-    // 未確認のメールアドレスの場合、メールを送信する
-    if (!verified) {
-        // メール送信処理
-        firebase.auth().currentUser.sendEmailVerification();
+    firebase.auth().onAuthStateChanged( (user) => {
+      let h1   = document.querySelector('h1');
+      let info = document.querySelector('#info');
 
-        var email = firebase.auth().currentUser.email;
-        alert('確認メールを送信しました。', email);
-    }
-
-    // firebase.auth().onAuthStateChanged( (user) => {
-    //   let h1   = document.querySelector('h1');
-    //   let info = document.querySelector('#info');
-
-    //   if(user) {
-    //     h1.innerText   = 'Login Complete!';
-    //     info.innerHTML =   `${user.displayName}さんがログインしました`
-    //                      + '<ul>'
-    //                      +   `<li>${user.email}</li>`
-    //                      +   `<li>${user.emailVerified}</li>`
-    //                      + '<ul>';
-    //     console.log(user);
-    //   }
-    //   else {
-    //     h1.innerText = 'Not Login';
-    //   }
-    // });
+      if(user) {
+        h1.innerText   = 'Login Complete!';
+        info.innerHTML =   `${user.displayName}さんがログインしました`
+                         + '<ul>'
+                         +   `<li>${user.email}</li>`
+                         +   `<li>${user.emailVerified}</li>`
+                         + '<ul>';
+        console.log(user);
+      }
+      else {
+        h1.innerText = 'Not Login';
+      }
+    });
   </script>
 </body>
 </html>
