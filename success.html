@@ -12,7 +12,12 @@
   <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
   <!-- <script src="/js/config.js"></script> -->
   <script>
-
+    var config = {
+      apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
+      authDomain: "gcmproject-141802.firebaseapp.com",
+    };
+    firebase.initializeApp(config);
+    
     // 存在確認済のメールアドレスかどうか(true or false)
     var verified = firebase.auth().currentUser.emailVerified;
     console.log('verified:' +verified);
@@ -25,24 +30,24 @@
         var email = firebase.auth().currentUser.email;
         alert('確認メールを送信しました。', email);
     }
-    
-    firebase.auth().onAuthStateChanged( (user) => {
-      let h1   = document.querySelector('h1');
-      let info = document.querySelector('#info');
 
-      if(user) {
-        h1.innerText   = 'Login Complete!';
-        info.innerHTML =   `${user.displayName}さんがログインしました`
-                         + '<ul>'
-                         +   `<li>${user.email}</li>`
-                         +   `<li>${user.emailVerified}</li>`
-                         + '<ul>';
-        console.log(user);
-      }
-      else {
-        h1.innerText = 'Not Login';
-      }
-    });
+    // firebase.auth().onAuthStateChanged( (user) => {
+    //   let h1   = document.querySelector('h1');
+    //   let info = document.querySelector('#info');
+
+    //   if(user) {
+    //     h1.innerText   = 'Login Complete!';
+    //     info.innerHTML =   `${user.displayName}さんがログインしました`
+    //                      + '<ul>'
+    //                      +   `<li>${user.email}</li>`
+    //                      +   `<li>${user.emailVerified}</li>`
+    //                      + '<ul>';
+    //     console.log(user);
+    //   }
+    //   else {
+    //     h1.innerText = 'Not Login';
+    //   }
+    // });
   </script>
 </body>
 </html>
