@@ -13,6 +13,31 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
   <script>
+
+    var actionCodeSettings = {
+      url: 'https://gcmproject-141802.firebaseapp.com/',
+      // This must be true.
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: 'com.mee.ios'
+      },
+      android: {
+        packageName: 'com.mee.android',
+        installApp: true,
+        minimumVersion: '12'
+      },
+      dynamicLinkDomain: 'https://gcmproject-141802.firebaseapp.com/'
+    };
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+    .then(function() {
+      window.localStorage.setItem('emailForSignIn', email);
+    })
+    .catch(function(error) {
+      // Some error occurred, you can inspect the code: error.code
+      console.log('error in sendung confirmation')
+    });
+  </script>
+  <!-- <script>
     // Firebaseの初期化
     var config = {
       apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
@@ -63,7 +88,7 @@
         var email = firebase.auth().currentUser.email;
         alert('確認メールを送信しました。', email);
     }
-  </script>
+  </script> -->
 </head>
 <body>
   <div id="firebaseui-auth-container"></div>
