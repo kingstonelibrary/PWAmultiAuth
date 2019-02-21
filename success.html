@@ -17,11 +17,12 @@
       authDomain: "gcmproject-141802.firebaseapp.com",
     };
     firebase.initializeApp(config);
+    let domain = document.domain;
+    let port   = (domain === 'localhost')?  5000:80;
 
     firebase.auth().onAuthStateChanged( (user) => {
       let h1   = document.querySelector('h1');
       let info = document.querySelector('#info');
-console.log('user:' + user)
       if(user) {
         h1.innerText   = 'Login Complete!';
         info.innerHTML =   `${user.displayName}さんがログインしました`
