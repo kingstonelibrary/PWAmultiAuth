@@ -48,8 +48,6 @@
       tosUrl: 'http://'
     };
 
-    // FirebaseUI描画開始
-    ui.start('#firebaseui-auth-container', uiConfig);
 
     // 存在確認済のメールアドレスかどうか(true or false)
     var verified = firebase.auth().currentUser.emailVerified;
@@ -63,6 +61,10 @@
         var email = firebase.auth().currentUser.email;
         alert('確認メールを送信しました。', email);
     }
+    
+    // FirebaseUI描画開始
+    ui.start('#firebaseui-auth-container', uiConfig);
+
   </script>
 </head>
 <body>
