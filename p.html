@@ -1,22 +1,61 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <title>Hello PWA. p.html</title>
-  <style>
-    body {
-      text-align:center;
-      font-size: 40px;
-      vertical-align: middle;
-    }
-    .image {
-      width: 80%; 
-      margin: auto;
-      display: block;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>[firebase] my-sample-project</title>
+
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+  <script>
+    // Firebaseの初期化
+    var config = {
+      apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
+      authDomain: "gcmproject-141802.firebaseapp.com",
+    };
+    firebase.initializeApp(config);
+
+    // FirebaseUIインスタンス初期化
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    // FirebaseUIの各種設定
+    var uiConfig = {
+      callbacks: {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          // サインイン成功時のコールバック関数
+          // 戻り値で自動的にリダイレクトするかどうかを指定
+          return true;
+        },
+        uiShown: function() {
+          // FirebaseUIウィジェット描画完了時のコールバック関数
+          // 読込中で表示しているローダー要素を消す
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      // リダイレクトではなく、ポップアップでサインインフローを表示
+      signInFlow: 'popup',
+      signInSuccessUrl: 'success.html',
+      signInOptions: [
+        // サポートするプロバイダ(メールアドレス)を指定
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      // Terms of service url.(サービス利用規約ページの)
+      tosUrl: 'http://'
+    };
+
+    // FirebaseUI描画開始
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
 </head>
 <body>
-  <h1>p.html</h1>
-  <img src="./p-chan.jpg" alt="p-chan" class="image" />
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+<br><br>
   <a href="index.html">index.html</a>
 </body>
 </html>
