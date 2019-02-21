@@ -17,8 +17,15 @@
     var config = {
       apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
       authDomain: "gcmproject-141802.firebaseapp.com",
+      projectId: "gcmproject-141802",
     };
     firebase.initializeApp(config);
+
+    //----------------------------------------------
+    // ドメインとポート番号
+    //----------------------------------------------
+    let domain = document.domain;
+    let port   = (domain === 'localhost')?  5000:80;
 
     // FirebaseUIインスタンス初期化
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -49,19 +56,6 @@
     };
 
 
-    // 存在確認済のメールアドレスかどうか(true or false)
-    var verified = firebase.auth().currentUser.emailVerified;
-    console.log('verified:' +verified);
-
-    // 未確認のメールアドレスの場合、メールを送信する
-    if (!verified) {
-        // メール送信処理
-        firebase.auth().currentUser.sendEmailVerification();
-
-        var email = firebase.auth().currentUser.email;
-        alert('確認メールを送信しました。', email);
-    }
-    
     // FirebaseUI描画開始
     ui.start('#firebaseui-auth-container', uiConfig);
 
