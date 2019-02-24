@@ -4,7 +4,7 @@
     <link rel="manifest" href="./manifest.json" />
     <script>
       // service workerが有効なら、service-worker.js を登録します
-      alert("serviceWorker" in navigator);
+      alert("serviceWorker" in navigator)
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("./service-worker.js")
