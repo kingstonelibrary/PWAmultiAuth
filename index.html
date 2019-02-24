@@ -1,53 +1,69 @@
 <html>
-<head>
-  <!-- manifest.jsonを呼び出しています -->
-  <link rel="manifest" href="./manifest.json">
-  <script>
-    // service workerが有効なら、service-worker.js を登録します
-    alert('serviceWorker' in navigator);
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js').then(function() { console.log('Service Worker Registered'); });
-   }
-  </script>
-  <title>Hello PWA.</title>
-  <style>
-    body {
-      text-align:center;
-      font-size: 40px;
-      vertical-align: middle;
-    }
-    .image {
-      width: 80%; 
-      margin: auto;
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <div class="head" style="display:block;height:300px;">
-  <h3>Hello PWA.</h3>
-  <h3>実験中</h3>
-  <img src="./pwa-logo.svg" style="height:200px;" alt="PWA logo" class="image" />
-  <a href="p.html">メール認証実験(Firebase)</a>
-  </div><br><br><br><br>
-  <h4>Androidでは初回アクセス時からバナーが出てくる。<br>タップしたらダイアログ出る。<br>ブラウザのメニューもキャッシュ後は変化する</h4>
-<div class="imgwrap">
-<img src="./images/1.png"  style="height:400px;" alt="">
-<img src="./images/2.png" style="height:400px;" alt="">
-<img src="./images/3.png" style="height:400px;" alt="">
-<img src="./images/4.png" style="height:400px;" alt="">
-<hr>
-<h4>スマホで通知許可ボタン押した時</h4>
-<img src="./images/p1.png"  style="height:400px;" alt="">
-<img src="./images/p2.png" style="height:400px;" alt="">
-<h4>参考：GitHUBページ作成注意</h4>
-画像はFirebaseへの展開サイトで行ったもの
-<ul>
-  <li>リポジトリ作成</li>
-  <li>gh-pagesブランチ切る</li>
-  <li>ローカルにクローン</li>
-  <li>編集後プッシュ</li>
-</ul>
-</div>
-</body>
+  <head>
+    <!-- manifest.jsonを呼び出しています -->
+    <link rel="manifest" href="./manifest.json" />
+    <script>
+      // service workerが有効なら、service-worker.js を登録します
+      alert("serviceWorker" in navigator);
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then(function() {
+            console.log("Service Worker Registered");
+            registration.onupdatefound = function() {   // ervice Worker更新検知
+              console.log('アップデートがあります！');
+              registration.update();
+            }
+          });
+      }
+    </script>
+    <title>Hello PWA.</title>
+    <style>
+      body {
+        text-align: center;
+        font-size: 40px;
+        vertical-align: middle;
+      }
+      .image {
+        width: 80%;
+        margin: auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head" style="display:block;height:300px;">
+      <h3>Hello PWA.</h3>
+      <h3>実験中</h3>
+      <img
+        src="./pwa-logo.svg"
+        style="height:200px;"
+        alt="PWA logo"
+        class="image"
+      />
+      <a href="p.html">メール認証実験(Firebase)</a>
+    </div>
+    <br /><br /><br /><br />
+    <h4>
+      Androidでは初回アクセス時からバナーが出てくる。<br />タップしたらダイアログ出る。<br />ブラウザのメニューもキャッシュ後は変化する
+    </h4>
+    <div class="imgwrap">
+      <img src="./images/1.png" style="height:400px;" alt="" />
+      <img src="./images/2.png" style="height:400px;" alt="" />
+      <img src="./images/3.png" style="height:400px;" alt="" />
+      <img src="./images/4.png" style="height:400px;" alt="" />
+      <hr />
+      <h4>スマホで通知許可ボタン押した時</h4>
+      <img src="./images/p1.png" style="height:400px;" alt="" />
+      <img src="./images/p2.png" style="height:400px;" alt="" />
+      <h4>参考：GitHUBページ作成注意</h4>
+      画像はFirebaseへの展開サイトで行ったもの
+      <ul>
+        <li>リポジトリ作成</li>
+        <li>gh-pagesブランチ切る</li>
+        <li>ローカルにクローン</li>
+        <li>編集後プッシュ</li>
+      </ul>
+    </div>
+  </body>
 </html>
