@@ -21,21 +21,41 @@
     let port   = (domain === 'localhost')?  5000:80;
 
     firebase.auth().onAuthStateChanged( (user) => {
-      let h1   = document.querySelector('h1');
-      let info = document.querySelector('#info');
-      if(user) {
-        h1.innerText   = 'Login Complete!';
-        info.innerHTML =   `${user.displayName}さんがログインしました`
-                         + '<ul>'
-                         +   `<li>${user.email}</li>`
-                         +   `<li>${user.emailVerified}</li>`
-                         + '<ul>';
-        console.log(user);
+      console.log(user);
+
+      //------------------------------------
+      // 未ログイン状態で訪れた場合
+      //------------------------------------
+      if(user === null){
+        showMessage('Not Login', 'ログインが必要な画面です');
+        return(false);
       }
+
+      //------------------------------------
+      // メアド確認済み
+      //------------------------------------
+      if( user.emailVerified ) {
+        showMessage('Login Complete!', `${user.displayName}さんがログインしました`);
+      }
+      //------------------------------------
+      // メアド未確認
+      //------------------------------------
       else {
-        h1.innerText = 'Not Login';
+        user.sendEmailVerification()
+          .then(()=>{
+            showMessage('Send confirm mail', `${user.email}宛に確認メールを送信しました`);
+          })
+          .catch((error)=>{
+            showMessage('[Error] Can not send mail', `${user.email}宛に確認メールを送信できませんでした: ${error}`);
+          });
       }
     });
+
+    function showMessage(title, msg) {
+      document.querySelector('h1').innerText    = title;
+      document.querySelector('#info').innerHTML = msg;
+    }
+
   </script>
 </body>
 </html>
