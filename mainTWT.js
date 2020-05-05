@@ -3,7 +3,8 @@
   authDomain: "gcmproject-141802.firebaseapp.com",
 };
 firebase.initializeApp(config);
-
+let domain = document.domain;
+let port   = (domain === 'localhost')?  5000:80;
 document.addEventListener('DOMContentLoaded', function() {
 const provider = new firebase.auth.TwitterAuthProvider();
     //const messaging = firebase.messaging();
