@@ -24,21 +24,27 @@ const provider = new firebase.auth.TwitterAuthProvider();
     if(!loggedInnUser){
       // let res =firebase.auth().signInWithRedirect(provider)              // リダイレクトだとなぜかログインした状況判断ができないのでポップアップにしてる
 
-      firebase.auth().signInWithPopup(provider).then(function(result) {　   // ポップアップされる
-        $('#RES').text('Logged Inn !');
-        token = result.credential.accessToken;                              // アクセストークンを得てTwiiterAPIを利用できる
-        secret = result.credential.secret;
-        loggedInnUser = result.user;                                        // ユーザ情報
-        $('.token').text(token);
-        $('.secret').text(secret);
-        // ...様々な処理...
-      }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        // ...エラー処理...
-      });
+    //----------------------------------------------
+    // Firebase UIの設定
+    //----------------------------------------------
+    var uiConfig = {
+      // ログイン完了時のリダイレクト先
+      signInSuccessUrl: 'done.html',
+
+      // 利用する認証機能
+      signInOptions: [
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID
+      ],
+
+      // 利用規約のURL(任意で設定)
+      tosUrl: 'http://example.com/kiyaku/',
+      // プライバシーポリシーのURL(任意で設定)
+      privacyPolicyUrl: 'http://example.com/privacy'
+    };
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+
     }
 
 });
