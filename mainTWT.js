@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //----------------------------------------------
     var uiConfig = {
       // ログイン完了時のリダイレクト先
-      signInSuccessUrl: 'https://kingstonelibrary.github.io/PWAmultiAuth/done.html',
+      signInSuccessUrl: '/PWAmultiAuth/done.html',
 
       // 利用する認証機能
       signInOptions: [
