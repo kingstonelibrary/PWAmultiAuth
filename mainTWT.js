@@ -12,44 +12,73 @@ let domain = document.domain;
 let port   = (domain === 'localhost')?  5000:80;
 
 document.addEventListener('DOMContentLoaded', function() {
-const provider = new firebase.auth.TwitterAuthProvider();
-    //const messaging = firebase.messaging();
-    let loggedInnUser;
-    // ログイン結果表示初期化
-    $('#RES').text('');
-
-    firebase.auth().onAuthStateChanged(function(user) {                    // 以下のポップアップで許諾／拒否が行われた時のイベントハンドラ
-      if (user) {
-        loggedInnUser = user;
-      } else {
-        // No user is signed in.
-      }
-    });
-
-    if(!loggedInnUser){
-      // let res =firebase.auth().signInWithRedirect(provider)              // リダイレクトだとなぜかログインした状況判断ができないのでポップアップにしてる
-
     //----------------------------------------------
     // Firebase UIの設定
     //----------------------------------------------
     var uiConfig = {
       // ログイン完了時のリダイレクト先
-      signInSuccessUrl: 'done.html',
+      signInSuccessUrl: '/auth/multi/',
 
       // 利用する認証機能
       signInOptions: [
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        {provider:firebase.auth.PhoneAuthProvider.PROVIDER_ID, defaultCountry:'JP'},
+        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
 
       // 利用規約のURL(任意で設定)
       tosUrl: 'http://example.com/kiyaku/',
       // プライバシーポリシーのURL(任意で設定)
-      privacyPolicyUrl: 'http://example.com/privacy'
-    };
+      privacyPolicyUrl: 'https://miku3.net/privacy.html'
+  };
 
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseui-auth-container', uiConfig);
-
+  //----------------------------------------------
+  // ログイン状態のチェック
+  //----------------------------------------------
+  firebase.auth().onAuthStateChanged( (user) => {
+    // ログイン済み
+    if(user) {
+      showLogin('Login Complete!', `${user.displayName}さんがログインしました<br>(${user.uid})`);
+      console.log(user);
     }
+    // 未ログイン
+    else {
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      ui.start('#firebaseui-auth-container', uiConfig);
+    }
+  });
 
+  //----------------------------------------------
+  // ログアウト
+  //----------------------------------------------
+  document.querySelector('#logout').addEventListener("click", ()=>{
+    firebase.auth().signOut().then(()=>{
+        showLogout("Firebase Auth Sample", "");
+      })
+      .catch( (error)=>{
+        alert(`ログアウトできませんでした(${error})`);
+      });
+  });
+
+  /**
+   * ログイン時の各種表示
+   */
+  function showLogin(title, msg){
+    document.querySelector('h1').innerHTML    = title;
+    document.querySelector('#info').innerHTML = msg;
+    document.querySelector('#logout').classList.remove("hide");
+  }
+
+  /**
+   * ログアウト時の各種表示
+   */
+   function showLogout(title, msg){
+    document.querySelector('h1').innerHTML    = title;
+    document.querySelector('#info').innerHTML = msg;
+    document.querySelector('#logout').classList.add("hide");
+  }
 });
