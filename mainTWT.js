@@ -1,7 +1,12 @@
- var config = {
+var config = {
   apiKey: "AIzaSyCAQ_TOCtBTXel87hCCRdXy-L4eUPt1UFg",
   authDomain: "gcmproject-141802.firebaseapp.com",
+  databaseURL: "https://gcmproject-141802.firebaseio.com",
+  projectId: "gcmproject-141802",
+  storageBucket: "gcmproject-141802.appspot.com",
+  messagingSenderId: "961587936477"
 };
+
 firebase.initializeApp(config);
 let domain = document.domain;
 let port   = (domain === 'localhost')?  5000:80;
