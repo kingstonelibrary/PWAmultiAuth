@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        {provider: firebase.auth.EmailAuthProvider.PROVIDER_ID},
+        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
         {provider:firebase.auth.PhoneAuthProvider.PROVIDER_ID, defaultCountry:'JP'},
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
