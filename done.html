@@ -17,6 +17,26 @@
       let info = document.querySelector('#info');
 
       if(user) {
+        console.log(user.auth);
+        
+        /*  
+            本当はここで、認証をメールで行っていた場合は、そのメール確認ができているかどうかの確認をしたい
+            （要件１）この”user”はメールでの認証をしたユーザー華道家の判定
+            （要件２）メール認証の場合、下記コードでメール確認済みかどうか分岐する
+              // if( user.emailVerified ) {
+              //   showMessage('Login Complete!', `${user.displayName}さんがログインしました`);
+              //   return;
+              // }
+              // else {
+              //   user.sendEmailVerification()
+              //     .then(()=>{
+              //       showMessage('Send confirm mail', `${user.email}宛に確認メールを送信しました`);
+              //     })
+              //     .catch((error)=>{
+              //       showMessage('[Error] Can not send mail', `${user.email}宛に確認メールを送信できませんでした: ${error}`);
+              //     });
+              // }
+        */
         h1.innerText   = 'Login Complete!';
         info.innerHTML = `${user.displayName}さんがログインしました<br>` +
                          `(${user.uid})`;
