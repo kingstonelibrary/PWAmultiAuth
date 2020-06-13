@@ -35,9 +35,22 @@
               //     });
               // }
         */
+             if( user.emailVerified ) {
+                showMessage('Login Complete!', `${user.displayName}さんがログインしました`);
+                return;
+              }
+              else {
+                user.sendEmailVerification()
+                  .then(()=>{
+                    showMessage('Send confirm mail', `${user.email}宛に確認メールを送信しました`);
+                  })
+                  .catch((error)=>{
+                    showMessage('[Error] Can not send mail', `${user.email}宛に確認メールを送信できませんでした: ${error}`);
+                  });
+              }
         h1.innerText   = 'Login Complete!';
         info.innerHTML = `${user.displayName}さんがログインしました<br>` +
-                         `(${user.uid})+(${user.auth})`;
+                         `(${user.uid})`;
         console.log(user);
       }
       else {
