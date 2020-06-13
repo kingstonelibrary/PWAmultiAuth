@@ -17,8 +17,6 @@
       let info = document.querySelector('#info');
 
       if(user) {
-        console.log(user.auth);
-        
         /*  
             本当はここで、認証をメールで行っていた場合は、そのメール確認ができているかどうかの確認をしたい
             （要件１）この”user”はメールでの認証をしたユーザー華道家の判定
@@ -39,7 +37,7 @@
         */
         h1.innerText   = 'Login Complete!';
         info.innerHTML = `${user.displayName}さんがログインしました<br>` +
-                         `(${user.uid})`;
+                         `(${user.uid})+(${user.auth})`;
         console.log(user);
       }
       else {
