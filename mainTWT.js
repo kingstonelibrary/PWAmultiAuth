@@ -12,14 +12,8 @@ let domain = document.domain;
 let port   = (domain === 'localhost')?  5000:80;
 
 document.addEventListener('DOMContentLoaded', function() {
-    //----------------------------------------------
-    // Firebase UIの設定
-    //----------------------------------------------
     var uiConfig = {
-      // ログイン完了時のリダイレクト先
       signInSuccessUrl: '/PWAmultiAuth/done.html',
-
-      // 利用する認証機能
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -29,23 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
         {provider:firebase.auth.PhoneAuthProvider.PROVIDER_ID, defaultCountry:'JP'},
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
-
-      // 利用規約のURL(任意で設定)
       tosUrl: 'http://example.com/kiyaku/',
-      // プライバシーポリシーのURL(任意で設定)
       privacyPolicyUrl: 'https://miku3.net/privacy.html'
   };
 
-  //----------------------------------------------
-  // ログイン状態のチェック
-  //----------------------------------------------
+
   firebase.auth().onAuthStateChanged( (user) => {
-    // ログイン済み
+    // already logged inn
     if(user) {
       showLogin('Login Complete!', `${user.displayName}さんがログインしました<br>(${user.uid})`);
       console.log(user);
     }
-    // 未ログイン
+    // not logged inn yet
     else {
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       ui.start('#firebaseui-auth-container', uiConfig);
@@ -53,19 +42,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   //----------------------------------------------
-  // ログアウト
+  // log out
   //----------------------------------------------
   document.querySelector('#logout').addEventListener("click", ()=>{
     firebase.auth().signOut().then(()=>{
         showLogout("Firebase Auth Sample", "");
       })
       .catch( (error)=>{
-        alert(`ログアウトできませんでした(${error})`);
+        alert(`couldn't log out(${error})`);
       });
   });
 
   /**
-   * ログイン時の各種表示
+   * contents after logged inn
    */
   function showLogin(title, msg){
     document.querySelector('h1').innerHTML    = title;
@@ -74,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /**
-   * ログアウト時の各種表示
+   * contents when logging out
    */
    function showLogout(title, msg){
     document.querySelector('h1').innerHTML    = title;
