@@ -22,7 +22,8 @@
             （necessary１） we need to know  if user is useing mail auth or other method
             （necessary２） when user is using mail auth, we have to check if its addresss had been confirmed
         */
-
+          console.log(Object.keys(user););
+          
           if (user.email) {
             if (user.emailVerified) {
               showMessage(
@@ -39,7 +40,7 @@
                 .then(() => {
                   showMessage(
                     'Send confirm mail',
-                    `we sent mail to${user.email}`
+                    `we sent mail to ${user.email}`
                   );
                 })
                 .catch((error) => {
