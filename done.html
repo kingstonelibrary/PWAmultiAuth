@@ -59,6 +59,9 @@
           info.innerHTML =
             `Now Mr/Ms ${user.displayName} logged inn<br>` + `(${user.uid})`;
         } else {
+          if (document.querySelector('#logout')) {
+            document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
+          }
           h1.innerText = 'Not Login';
         }
       });
@@ -87,7 +90,7 @@
       function showLogout(title, msg) {
         document.querySelector('h1').innerHTML = title;
         document.querySelector('#info').innerHTML = msg;
-        document.querySelector('#logout').parentNode.removeChild(document.querySelector('#logout'));
+        document.querySelector('#logout').parentElement.removeChild(document.querySelector('#logout'));
       }
     </script>
   </body>
