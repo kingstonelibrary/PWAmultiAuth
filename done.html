@@ -21,20 +21,23 @@
             if user is using mail auth, we want to check if the e-mail address had been confirmed.
             （necessary１） we need to know  if user is useing mail auth or other method
             （necessary２） when user is using mail auth, we have to check if its addresss had been confirmed
-              // if( user.emailVerified ) {
-              //   showMessage('Login Complete!', `Now Mr/Ms ${user.displayName} logged inn`);
-              //   return;
-              // }
-              // else {
-              //   user.sendEmailVerification()
-              //     .then(()=>{
-              //       showMessage('Send confirm mail', `we sent mail to${user.email}`);
-              //     })
-              //     .catch((error)=>{
-              //       showMessage('[Error] Can not send mail', `we couldn't send mail to ${user.email}た: ${error}`);
-              //     });
-              // }
         */
+        if (user.email) {
+          if( user.emailVerified ) {
+            showMessage('Login Complete!', `Now Mr/Ms ${user.displayName} logged inn`);
+            return;
+          }
+          else {
+            user.sendEmailVerification()
+              .then(()=>{
+                showMessage('Send confirm mail', `we sent mail to${user.email}`);
+              })
+              .catch((error)=>{
+                showMessage('[Error] Can not send mail', `we couldn't send mail to ${user.email}た: ${error}`);
+              });
+          }
+        }
+
         console.log(user.providerData);
         h1.innerText   = 'Login Complete!';
         info.innerHTML = `Now Mr/Ms ${user.displayName} logged inn<br>` +
