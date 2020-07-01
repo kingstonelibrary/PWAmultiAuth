@@ -87,7 +87,7 @@
       function showLogout(title, msg) {
         document.querySelector('h1').innerHTML = title;
         document.querySelector('#info').innerHTML = msg;
-        document.querySelector('#logout').classList.add('hide');
+        document.querySelector('#logout').parentNode.removeChild(document.querySelector('#logout'));
       }
     </script>
   </body>
