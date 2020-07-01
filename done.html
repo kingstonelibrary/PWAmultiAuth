@@ -22,7 +22,10 @@
             （necessary１） we need to know  if user is useing mail auth or other method
             （necessary２） when user is using mail auth, we have to check if its addresss had been confirmed
         */
+        console.log(`user.email ${user.email}`);
+        
         if (user.email) {
+          console.log(`user.emailVerified ${user.emailVerified}`);
           if( user.emailVerified ) {
             showMessage('Login Complete!', `Now Mr/Ms ${user.displayName} logged inn`);
             return;
