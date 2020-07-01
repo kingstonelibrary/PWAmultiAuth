@@ -18,10 +18,10 @@
 
         if (user) {
           /*  
-            if user is using mail auth, we want to check if the e-mail address had been confirmed.
-            （necessary１） we need to know  if user is useing mail auth or other method
-            （necessary２） when user is using mail auth, we have to check if its addresss had been confirmed
-        */
+                if user is using mail auth, we want to check if the e-mail address had been confirmed.
+                （necessary１） we need to know  if user is useing mail auth or other method
+                （necessary２） when user is using mail auth, we have to check if its addresss had been confirmed
+            */
           // console.log(Object.keys(user))
           if (user.email) {
             if (user.emailVerified) {
@@ -65,8 +65,19 @@
         const logoutBtn = document.createElement('input');
         logoutBtn.type = 'button';
         logoutBtn.value = 'Log Out';
-        logoutBtn.id = 'logout'
+        logoutBtn.id = 'logout';
         document.body.appendChild(logoutBtn);
+        logoutBtn.addEventListener('click', () => {
+          firebase
+            .auth()
+            .signOut()
+            .then(() => {
+              showLogout('Firebase Auth Sample', '');
+            })
+            .catch((error) => {
+              alert(`couldn't log out(${error})`);
+            });
+        });
       }
     </script>
   </body>
