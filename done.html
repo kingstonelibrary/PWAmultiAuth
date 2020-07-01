@@ -27,7 +27,8 @@
             if (user.emailVerified) {
               showMessage(
                 'Login Complete!',
-                `Now Mr/Ms ${user.displayName} logged inn`
+                `Now Mr/Ms ${user.displayName} logged inn`,
+                true
               );
               // return;
             } else {
@@ -39,13 +40,15 @@
                 .then(() => {
                   showMessage(
                     'Send confirm mail',
-                    `we sent mail to ${user.email}`
+                    `we sent mail to ${user.email}`,
+                    false
                   );
                 })
                 .catch((error) => {
                   showMessage(
                     '[Error] Can not send mail',
-                    `we couldn't send mail to ${user.email}た: ${error}`
+                    `we couldn't send mail to ${user.email}た: ${error}`,
+                    false
                   );
                 });
               return;
@@ -59,25 +62,27 @@
           h1.innerText = 'Not Login';
         }
       });
-      function showMessage(title, msg) {
+      function showMessage(title, msg, logoutFlag) {
         document.querySelector('h1').innerText = title;
         document.querySelector('#info').innerHTML = msg;
-        const logoutBtn = document.createElement('input');
-        logoutBtn.type = 'button';
-        logoutBtn.value = 'Log Out';
-        logoutBtn.id = 'logout';
-        document.body.appendChild(logoutBtn);
-        logoutBtn.addEventListener('click', () => {
-          firebase
-            .auth()
-            .signOut()
-            .then(() => {
-              showLogout('Firebase Auth Sample', '');
-            })
-            .catch((error) => {
-              alert(`couldn't log out(${error})`);
-            });
-        });
+        if (logoutFlag) {
+          const logoutBtn = document.createElement('input');
+          logoutBtn.type = 'button';
+          logoutBtn.value = 'Log Out';
+          logoutBtn.id = 'logout';
+          document.body.appendChild(logoutBtn);
+          logoutBtn.addEventListener('click', () => {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => {
+                showLogout('Firebase Auth Sample', '');
+              })
+              .catch((error) => {
+                alert(`couldn't log out(${error})`);
+              });
+          });
+        }
       }
     </script>
   </body>
