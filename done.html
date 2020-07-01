@@ -38,10 +38,10 @@
               .catch((error)=>{
                 showMessage('[Error] Can not send mail', `we couldn't send mail to ${user.email}た: ${error}`);
               });
+              return;
           }
         }
 
-        console.log(user.providerData);
         h1.innerText   = 'Login Complete!';
         info.innerHTML = `Now Mr/Ms ${user.displayName} logged inn<br>` +
                          `(${user.uid})`;
