@@ -62,6 +62,10 @@
           h1.innerText = 'Not Login';
         }
       });
+      function showMessage(title, msg) {
+        document.querySelector('h1').innerText = title;
+        document.querySelector('#info').innerHTML = msg;
+      }
     </script>
   </body>
 </html>
