@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         {provider:firebase.auth.PhoneAuthProvider.PROVIDER_ID, defaultCountry:'JP'},
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
       ],
       tosUrl: 'http://example.com/kiyaku/',
       privacyPolicyUrl: 'https://miku3.net/privacy.html'
