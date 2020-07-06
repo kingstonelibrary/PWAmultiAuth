@@ -42,9 +42,6 @@
               user
                 .sendEmailVerification(actionCodeSettings)
                 .then(() => {
-                  if (document.querySelector('#logout')) {
-                    document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
-                  }
                   showMessage(
                     'Send confirm mail',
                     `we sent mail to ${user.email}`,
@@ -94,6 +91,13 @@
                 alert(`couldn't log out(${error})`);
               });
           });
+        }else if(!logoutFlag){
+          console.log('!logoutFlag');          
+          if (document.querySelector('#logout')) {
+            console.log('#logout exists!);
+            
+            document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
+          }
         }
       }
       function showLogout(title, msg) {
