@@ -43,14 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
   //----------------------------------------------
   // log out
   //----------------------------------------------
-  document.querySelector('#logout').addEventListener("click", ()=>{
-    firebase.auth().signOut().then(()=>{
-        showLogout("Firebase Auth Sample", "");
-      })
-      .catch( (error)=>{
-        alert(`couldn't log out(${error})`);
-      });
-  });
+  // document.querySelector('#logout').addEventListener("click", ()=>{
+  //   firebase.auth().signOut().then(()=>{
+  //       showLogout("Firebase Auth Sample", "");
+  //     })
+  //     .catch( (error)=>{
+  //       alert(`couldn't log out(${error})`);
+  //     });
+  // });
 
   /**
    * contents after logged inn
