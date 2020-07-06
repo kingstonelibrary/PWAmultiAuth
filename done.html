@@ -36,6 +36,8 @@
                   + ' ' + ('0' + date.getHours()).slice(-2)
                   + ':' + ('0' + date.getMinutes()).slice(-2)
                   + ':' + ('0' + date.getSeconds()).slice(-2)
+                  console.log(`dateStr:${dateStr`);
+                  
               db.collection("loginRecords").add({
                 date: dateStr,
                 user: user.displayName,
