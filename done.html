@@ -75,6 +75,8 @@
         document.querySelector('h1').innerText = title;
         document.querySelector('#info').innerHTML = msg;
         if (logoutFlag && !document.querySelector('#logout')) {
+          console.log('in done.html');
+          
           const logoutBtn = document.createElement('input');
           logoutBtn.type = 'button';
           logoutBtn.value = 'Log Out';
