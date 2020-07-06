@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // already logged inn
     if(user) {
       showLogin('Login Complete!', `${user.displayName}さんがログインしました<br>(${user.uid})`);
-      console.log(user);
     }
     // not logged inn yet
     else {
@@ -59,7 +58,26 @@ document.addEventListener('DOMContentLoaded', function() {
   function showLogin(title, msg){
     document.querySelector('h1').innerHTML    = title;
     document.querySelector('#info').innerHTML = msg;
-    document.querySelector('#logout').classList.remove("hide");
+    if (document.querySelector('#logout')) {
+      document.querySelector('#logout').classList.remove("hide");
+    }else{
+      const logoutBtn = document.createElement('input');
+      logoutBtn.type = 'button';
+      logoutBtn.value = 'Log Out';
+      logoutBtn.id = 'logout';
+      document.body.appendChild(logoutBtn);
+      logoutBtn.addEventListener('click', () => {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            showLogout('Firebase Auth Sample', '');
+          })
+          .catch((error) => {
+            alert(`couldn't log out(${error})`);
+          });
+      });
+    }
   }
 
   /**
