@@ -74,7 +74,7 @@
       function showMessage(title, msg, logoutFlag) {
         document.querySelector('h1').innerText = title;
         document.querySelector('#info').innerHTML = msg;
-        if (logoutFlag) {
+        if (logoutFlag && !document.querySelector('#logout')) {
           const logoutBtn = document.createElement('input');
           logoutBtn.type = 'button';
           logoutBtn.value = 'Log Out';
@@ -98,9 +98,7 @@
         document.querySelector('#info').innerHTML = msg;
         document.querySelector('#logout').parentElement.removeChild(document.querySelector('#logout'));
       }
-      function loginRecord(user){
-        console.log(`loginRecord Func`);
-        
+      function loginRecord(user){        
         let date = new Date();
               let dateStr = date.getFullYear()
                   + '/' + ('0' + (date.getMonth() + 1)).slice(-2)
