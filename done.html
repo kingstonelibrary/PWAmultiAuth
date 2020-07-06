@@ -66,9 +66,7 @@
               );
         } else {
           if (document.querySelector('#logout')) {
-            var removeElem = document.getElementById('logout');
-            removeElem.parentNode.removeChild(removeElem);
-            // document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
+            document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
           }
           h1.innerText = 'Not Login';
         }
@@ -97,7 +95,8 @@
           console.log('!logoutFlag');          
           if (document.querySelector('#logout')) {
             console.log('#logout exists!');                      
-            document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
+            let removeElem = document.getElementById('logout');
+            removeElem.parentNode.removeChild(removeElem);
           }
         }
       }
