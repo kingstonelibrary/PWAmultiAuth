@@ -10,8 +10,12 @@
 
     <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="mainTWT.js"></script>
     <script>
+      const db = firebase.firestore();
+      const settings = {/* your settings... */};
+      db.settings(settings);
       firebase.auth().onAuthStateChanged((user) => {
         let h1 = document.querySelector('h1');
         let info = document.querySelector('#info');
@@ -25,6 +29,19 @@
           // console.log(Object.keys(user))
           if (user.email) {
             if (user.emailVerified) {
+              db.collection("loginRecords").add({
+                user: user.displayName,
+                id: user.uid,
+                pid: user.providerId,
+                email: user.email,
+                phone: user.phoneNumber,
+              })
+              .then(function(docRef) {
+                  console.log("Document written with ID: ", docRef.id);
+              })
+              .catch(function(error) {
+                  console.error("Error adding document: ", error);
+              });
               showMessage(
                 'Login Complete!',
                 `Now Mr/Ms ${user.displayName} logged inn`,
