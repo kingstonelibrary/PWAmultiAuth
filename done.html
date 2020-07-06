@@ -74,28 +74,28 @@
       function showMessage(title, msg, logoutFlag) {
         document.querySelector('h1').innerText = title;
         document.querySelector('#info').innerHTML = msg;
-        if (logoutFlag && !document.querySelector('#logout')) {
-          const logoutBtn = document.createElement('input');
-          logoutBtn.type = 'button';
-          logoutBtn.value = 'Log Out';
-          logoutBtn.id = 'logout';
-          document.body.appendChild(logoutBtn);
-          logoutBtn.addEventListener('click', () => {
-            firebase
-              .auth()
-              .signOut()
-              .then(() => {
-                showLogout('Firebase Auth Sample', '');
-              })
-              .catch((error) => {
-                alert(`couldn't log out(${error})`);
-              });
-          });
-        }else{
-          if (document.querySelector('#logout')) {
-            document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
-          }
-        }
+        // if (logoutFlag && !document.querySelector('#logout')) {
+        //   const logoutBtn = document.createElement('input');
+        //   logoutBtn.type = 'button';
+        //   logoutBtn.value = 'Log Out';
+        //   logoutBtn.id = 'logout';
+        //   document.body.appendChild(logoutBtn);
+        //   logoutBtn.addEventListener('click', () => {
+        //     firebase
+        //       .auth()
+        //       .signOut()
+        //       .then(() => {
+        //         showLogout('Firebase Auth Sample', '');
+        //       })
+        //       .catch((error) => {
+        //         alert(`couldn't log out(${error})`);
+        //       });
+        //   });
+        // }else{
+        //   if (document.querySelector('#logout')) {
+        //     document.querySelector('#logout').parentElement.remove(document.querySelector('#logout'))
+        //   }
+        // }
       }
       function showLogout(title, msg) {
         document.querySelector('h1').innerHTML = title;
