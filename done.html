@@ -91,10 +91,8 @@
                 alert(`couldn't log out(${error})`);
               });
           });
-        }else if(!logoutFlag){
-          console.log('!logoutFlag');          
-          if (document.querySelector('#logout')) {
-            console.log('#logout exists!');                      
+        }else if(!logoutFlag){  // ログイン完了画面以外のときのメッセージ表示時は”logout”ボタンがあれば削除      
+          if (document.querySelector('#logout')) {                
             let removeElem = document.getElementById('logout');
             removeElem.parentNode.removeChild(removeElem);
           }
