@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('#logout')) {
       document.querySelector('#logout').classList.remove("hide");
     }else{
-      console.log('in mainTWT');
+      alert('in mainTWT');
       
       const logoutBtn = document.createElement('input');
       logoutBtn.type = 'button';
